@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const router = express.Router();
-
 router.post("/register", async (req, res, next) => {
+ console.log("REGISTER API HIT");
   try {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
@@ -25,6 +25,9 @@ router.post("/register", async (req, res, next) => {
       email,
       password: hashedPassword
     });
+    console.log("Saved successfully");
+    console.log("Database:", User.db.name);
+    console.log("Collection:", User.collection.name);
     res.status(201).json({
       id: user._id,
       name: user.name,
